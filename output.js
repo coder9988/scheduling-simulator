@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const storedData = localStorage.getItem("scheduleData");
     if (!storedData) {
         console.error("No schedule data found.");
-        return;
+        return; 
     }
 
     const scheduleData = JSON.parse(storedData);
