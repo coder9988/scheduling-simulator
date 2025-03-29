@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100vh; 
 }
 
 .center-wrapper {
@@ -21,7 +21,7 @@ body {
     width: 80%;
     max-width: 1200px;
     border: 2px solid #26ce2c;
-    padding: 40px; /* Reduced padding slightly */
+    padding: 50px;
     text-align: center;
     background: #2c2c3e;
     background: url('container-background.jpeg') no-repeat center center;
@@ -30,7 +30,21 @@ body {
 }
 
 .algorithm-selection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
     margin-bottom: 20px;
+}
+
+.algorithm-selection select,
+.algorithm-selection input {
+    min-width: 120px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #4caf50;
+    background: #444455;
+    color: white;
 }
 
 .process-input, .process-table {
@@ -42,15 +56,54 @@ body {
     border-radius: 8px;
 }
 
-input, select {
+.process-input form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.process-input label, .process-input input {
+    flex: 1;
+    min-width: 100px;
+}
+
+.priority-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#priority {
+    width: 50%;
+    min-width: 100px;
+    text-align: center;
+}
+
+#addProcessButton {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+input {
     background: #444455;
-    color: #ffffff;
-    border: 1px solid rgb(13, 189, 13);
-    padding: 5px;
-    margin: 15px 0; /* Reduced excessive margin */
+    color: white;
+    border: 1px solid #4caf50;
+    padding: 8px;
     border-radius: 5px;
-    background: url('container-background.jpeg') no-repeat center center;
     transition: all 0.3s ease;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #b0ffb3;
+    opacity: 0.8;
+    font-style: italic;
 }
 
 input:focus, select:focus {
@@ -60,7 +113,7 @@ input:focus, select:focus {
     background: #555566;
 }
 
-button {
+button, #startSimulation {
     background: linear-gradient(135deg, #10b516, #4e8251);
     color: white;
     border: none;
@@ -71,7 +124,7 @@ button {
     font-weight: bold;
 }
 
-button:hover {
+button:hover, #startSimulation:hover {
     background: linear-gradient(135deg, #13f11e, #4caf50);
     color: #ffffff;
     border: 1px solid #4caf50;
@@ -79,13 +132,12 @@ button:hover {
     box-shadow: 0 4px 10px rgba(76, 175, 80, 0.5);
 }
 
-/* Table styling improvements */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #3a3a4f;
-    border-radius: 8px;
+    border-radius: 5px;
     overflow: hidden;
+    background: #3a3a4f;
 }
 
 th, td {
@@ -105,26 +157,6 @@ td {
     background: #444455;
 }
 
-tbody tr:nth-child(even) td {
-    background: #3a3a4f; /* Alternating row color */
-}
-
-/* Unified button styles */
-#startSimulationButton {
-    margin-top: 15px;
-    padding: 12px 20px;
-    font-size: 16px;
-    background: linear-gradient(135deg, #10b516, #4e8251);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-
-#startSimulationButton:hover {
-    background: linear-gradient(135deg, #13f11e, #4caf50);
-    color: #ffffff;
-    border: 1px solid #4caf50;
-    transform: scale(1.05);
+tr:nth-child(even) td {
+    background: #505060;
 }
