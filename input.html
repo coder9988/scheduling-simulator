@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPU Scheduling Simulator</title>
-    <link rel="stylesheet" href="style.css"></head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <div class="center-wrapper">
         <div class="container">
@@ -17,7 +17,7 @@
                     <option value="Priority">Priority Scheduling</option>
                     <option value="RoundRobin">Round Robin</option>
                 </select>
-                <input type="number" id="timeQuantum" placeholder="Time Quantum" style="display: none;">
+                <input type="number" id="timeQuantum" placeholder="Time Quantum (Required for RR)" min="1" style="display: none;">
             </div>
 
             <!-- Process Input Section -->
@@ -30,13 +30,17 @@
                     <input type="number" id="arrivalTime" placeholder="Enter Arrival Time" required>
                     <label for="burstTime">Burst Time:</label>
                     <input type="number" id="burstTime" placeholder="Enter Burst Time" required>
-                    <br>
-                    <label for="priority">Priority (Optional):</label>
-                    <input type="number" id="priority" placeholder="Enter Priority">
+                    
+                    <!-- Move Priority Label and Input to New Line -->
+                    <div class="priority-wrapper">
+                        <label for="priority">Priority (Optional):</label>
+                        <input type="number" id="priority" placeholder="Enter Priority">
+                    </div>
+            
                     <button type="button" id="addProcessButton">Add Process</button>
                 </form>
             </div>
-
+            
             <!-- Process Table -->
             <div class="process-table">
                 <h2>Process Table</h2>
@@ -57,8 +61,19 @@
             <button id="startSimulationButton">Start Simulation</button>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script>
+    <!-- <script src="script.js"></script> -->
+    <script src="input.js"></script>
+    <!-- <script>
+        
+        function toggleQuantumInput() {
+            const algorithm = document.getElementById("algorithm").value;
+            const timeQuantum = document.getElementById("timeQuantum");
+            const priorityInput = document.getElementById("priority");
+            
+            timeQuantum.style.display = algorithm === "RoundRobin" ? "block" : "none";
+            priorityInput.style.display = algorithm === "Priority" ? "block" : "none";
+        }
+
         document.getElementById("startSimulationButton").addEventListener("click", function () {
             const algorithm = document.getElementById("algorithm").value;
             const timeQuantum = document.getElementById("timeQuantum").value || 0;
@@ -83,7 +98,6 @@
             // Redirect to output.html
             window.location.href = "output.html";
         });
-    </script>
-    
+    </script> -->
 </body>
 </html>
