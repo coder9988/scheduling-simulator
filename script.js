@@ -1,5 +1,5 @@
 document.getElementById("addProcessButton").addEventListener("click", function () {
-    const pid = document.getElementById("pid").value;
+    const pid = document.getElementById("pid").value; 
     const arrivalTime = document.getElementById("arrivalTime").value;
     const burstTime = document.getElementById("burstTime").value;
     const priority = document.getElementById("priority").value;
