@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('background2.jpeg') no-repeat center center fixed;
+    background-color: #1e1e2f;
+    color: #2fd335;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    border: 2px solid #26ce2c;
+    padding: 40px; /* Reduced padding slightly */
+    text-align: center;
+    background: #2c2c3e;
+    background: url('container-background.jpeg') no-repeat center center;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.algorithm-selection {
+    margin-bottom: 20px;
+}
+
+.process-input, .process-table {
+    border: 1px solid #4caf50;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #3a3a4f;
+    background: url('container-background.jpeg') no-repeat center center;
+    border-radius: 8px;
+}
+
+input, select {
+    background: #444455;
+    color: #ffffff;
+    border: 1px solid rgb(13, 189, 13);
+    padding: 5px;
+    margin: 15px 0; /* Reduced excessive margin */
+    border-radius: 5px;
+    background: url('container-background.jpeg') no-repeat center center;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 8px #4caf50;
+    background: #555566;
+}
+
+button {
+    background: linear-gradient(135deg, #10b516, #4e8251);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #13f11e, #4caf50);
+    color: #ffffff;
+    border: 1px solid #4caf50;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.5);
+}
+
+/* Table styling improvements */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #3a3a4f;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #4caf50;
+    padding: 8px;
+    text-align: center;
+    color: #ffffff;
+}
+
+th {
+    background: #4caf50;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+td {
+    background: #444455;
+}
+
+tbody tr:nth-child(even) td {
+    background: #3a3a4f; /* Alternating row color */
+}
+
+/* Unified button styles */
+#startSimulationButton {
+    margin-top: 15px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #10b516, #4e8251);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+#startSimulationButton:hover {
+    background: linear-gradient(135deg, #13f11e, #4caf50);
+    color: #ffffff;
+    border: 1px solid #4caf50;
+    transform: scale(1.05);
+}
