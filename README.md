@@ -26,14 +26,18 @@ This project is a **CPU Scheduling Simulator** built using **HTML, CSS, and Java
 ## 📂 File Structure
 ```
 📂 scheduling-simulator
-├── input.html      # User input page
+├── input.html      # User input page for process details
 ├── output.html     # Simulation visualization page
-├── style.css       # Styling for pages
-├── input.js        # Handles input logic
-├── output.js       # Handles simulation and animation
-│── server.js       # Node.js server handling scheduling logic
-│── package.json    # Node dependencies
-│── README.md       # Project documentation
+├── gantt.html      # Gantt chart visualization page
+├── style.css       # Main styling for pages
+├── output.css      # Additional styling for output visualization
+├── input.js        # Handles input logic and form validation
+├── output.js       # Handles simulation results and display
+├── gantt.js        # Manages Gantt chart visualization
+├── script.js       # Common utility functions and event handlers
+├── server.js       # Node.js server handling scheduling algorithms and API endpoints
+├── package.json    # Node dependencies and project configuration
+└── README.md       # Project documentation
 ```
 
 ## 📌 Installation & Setup
