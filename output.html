@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPU Scheduling Simulator</title>
@@ -41,24 +41,29 @@
         
         <div class="middle-section">
             <div class="button-container">
-                <div class="button-column">
-                    <button class="pause">Pause</button>
-                    <button class="back">Back</button>
-                </div>
-                <div class="button-column">
-                    <button class="simulate">Simulate</button>
-                </div>
-                <div class="button-column">
-                    <button class="exit">Exit</button>
-                    <button class="again">Again</button>
-                </div>
+                <button class="simulate">Simulate</button>
+                <button class="pause">Pause</button>
+                <button class="back">Step Back</button>
+                <button class="again">Run Again</button>
+                <button class="view-gantt">View Gantt Chart</button>
             </div>
             
             <div class="metrics-table">
                 <h3>Metrics</h3>
-                <p>Average Waiting Time: <span id="avgWaitingTime"></span></p>
-                <p>Average Turnaround Time: <span id="avgTurnaroundTime"></span></p>
-                <p>Total Execution Time: <span id="totalExecutionTime"></span></p>
+                <table>
+                    <tr>
+                        <th>Average Waiting Time</th>
+                        <td><span id="avgWaitingTime">0.00</span></td>
+                    </tr>
+                    <tr>
+                        <th>Average Turnaround Time</th>
+                        <td><span id="avgTurnaroundTime">0.00</span></td>
+                    </tr>
+                    <tr>
+                        <th>Total Execution Time</th>
+                        <td><span id="totalExecutionTime">0.00</span></td>
+                    </tr>
+                </table>
             </div>
             
             <div class="ready-queue">
@@ -76,21 +81,15 @@
                         <th>Status</th>
                         <th>Remaining Burst Time</th>
                         <th>Waiting Time</th>
+                        <th>Completion Time</th>
+                        <th>Turnaround Time</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
     </div>
-    
-    <div class="gantt-chart">
-        <h3>Gantt Chart</h3>
-        <div id="chart"></div>
-    </div>
 
     <script src="output.js"></script>
-
-    
-    
 </body>
 </html>
