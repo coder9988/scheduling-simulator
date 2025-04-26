@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPU Scheduling Simulator</title>
@@ -14,12 +14,12 @@
                 <select id="algorithm" onchange="toggleQuantumInput()">
                     <option value="FCFS">First Come First Serve (FCFS)</option>
                     <option value="SJF">Shortest Job First (SJF)</option>
+                    <option value="SRTF">Shortest Remaining Time First (SRTF)</option>
                     <option value="Priority">Priority Scheduling</option>
                     <option value="RoundRobin">Round Robin</option>
                 </select>
                 <input type="number" id="timeQuantum" placeholder="Time Quantum (Required for RR)" min="1" style="display: none;">
             </div>
-
             <!-- Process Input Section -->
             <div class="process-input">
                 <h2>Process Input</h2>
@@ -61,43 +61,24 @@
             <button id="startSimulationButton">Start Simulation</button>
         </div>
     </div>
-    <!-- <script src="script.js"></script> -->
+
+    <!-- Gantt Chart Container -->
+    <div class="gantt-container">
+        <div id="ganttChart"></div>
+    </div>
+
     <script src="input.js"></script>
-    <!-- <script>
-        
+    <script src="output.js"></script>
+    <script>
         function toggleQuantumInput() {
             const algorithm = document.getElementById("algorithm").value;
             const timeQuantum = document.getElementById("timeQuantum");
-            const priorityInput = document.getElementById("priority");
-            
-            timeQuantum.style.display = algorithm === "RoundRobin" ? "block" : "none";
-            priorityInput.style.display = algorithm === "Priority" ? "block" : "none";
-        }
+            const priorityWrapper = document.querySelector(".priority-wrapper");
 
-        document.getElementById("startSimulationButton").addEventListener("click", function () {
-            const algorithm = document.getElementById("algorithm").value;
-            const timeQuantum = document.getElementById("timeQuantum").value || 0;
-            const processTable = document.getElementById("processTableBody").children;
-            
-            let processes = [];
-            for (let row of processTable) {
-                let cells = row.children;
-                processes.push({
-                    pid: cells[0].innerText,
-                    arrivalTime: parseInt(cells[1].innerText),
-                    burstTime: parseInt(cells[2].innerText),
-                    priority: cells[3].innerText ? parseInt(cells[3].innerText) : null
-                });
-            }
-    
-            const scheduleData = { processes, algorithm, timeQuantum };
-    
-            // Store the data in localStorage before navigating
-            localStorage.setItem("scheduleData", JSON.stringify(scheduleData));
-    
-            // Redirect to output.html
-            window.location.href = "output.html";
-        });
-    </script> -->
+            timeQuantum.style.display = algorithm === "RoundRobin" ? "block" : "none";
+            priorityWrapper.style.display = algorithm === "Priority" ? "block" : "none";
+        }
+    </script>
 </body>
 </html>
+
