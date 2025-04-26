@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gantt Chart - CPU Scheduling Simulator</title>
+    <link rel="stylesheet" href="output.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1e1e2f;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gantt-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #2c2c3e;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.5);
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .gantt-container::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .gantt-container::-webkit-scrollbar-track {
+            background: #3a3a4f;
+            border-radius: 5px;
+        }
+
+        .gantt-container::-webkit-scrollbar-thumb {
+            background: #4caf50;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .gantt-container::-webkit-scrollbar-thumb:hover {
+            background: #45a049;
+        }
+
+        #ganttChart {
+            min-width: 1000px;
+            height: 200px;
+            background: #3a3a4f;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gantt-timeline {
+            height: 40px;
+            background: #444455;
+            position: relative;
+            border-bottom: 2px solid #4caf50;
+            display: flex;
+            align-items: center;
+        }
+
+        .gantt-marker {
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: #4caf50;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-50%);
+            padding: 0 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .gantt-marker::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #4caf50;
+        }
+
+        .process-bar {
+            height: 40px;
+            margin: 10px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .slice {
+            height: 100%;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slice:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .slice-tooltip {
+            position: absolute;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(44, 44, 62, 0.95);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            line-height: 1.4;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+            min-width: 150px;
+            text-align: left;
+            pointer-events: none;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+        }
+
+        .slice:hover .slice-tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .tooltip-content {
+            position: relative;
+        }
+
+        .tooltip-content strong {
+            color: #4caf50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #28a745, #218838);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #218838, #28a745);
+            transform: scale(1.05);
+        }
+
+        .algorithm-summary {
+            width: 100%;
+            margin-top: 30px;
+            background: #2c2c3e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.5);
+        }
+
+        .algorithm-summary h3 {
+            color: #4caf50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .algorithm-summary table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .algorithm-summary th {
+            background: #3a3a4f;
+            color: #4caf50;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .algorithm-summary td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .algorithm-summary tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .algorithm-summary .type {
+            color: #2196f3;
+        }
+
+        .algorithm-summary .criteria {
+            color: #ff9800;
+        }
+
+        .algorithm-summary .preemptive {
+            color: #e91e63;
+        }
+
+        .algorithm-summary .notes {
+            color: #9c27b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="gantt-container">
+        <h2>Gantt Chart</h2>
+        <div id="ganttChart"></div>
+    </div>
+
+    <div class="algorithm-summary">
+        <h3>CPU Scheduling Algorithms Summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Type</th>
+                    <th>Selection Criteria</th>
+                    <th>Preemptive</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>FCFS</td>
+                    <td class="type">Non-Preemptive</td>
+                    <td class="criteria">Arrival Time</td>
+                    <td class="preemptive">No</td>
+                    <td class="notes">Simple but may cause convoy effect</td>
+                </tr>
+                <tr>
+                    <td>SJF</td>
+                    <td class="type">Non-Preemptive</td>
+                    <td class="criteria">Burst Time</td>
+                    <td class="preemptive">No</td>
+                    <td class="notes">Minimizes average waiting time</td>
+                </tr>
+                <tr>
+                    <td>SRTF</td>
+                    <td class="type">Preemptive</td>
+                    <td class="criteria">Remaining Time</td>
+                    <td class="preemptive">Yes</td>
+                    <td class="notes">Preemptive version of SJF</td>
+                </tr>
+                <tr>
+                    <td>Priority</td>
+                    <td class="type">Both</td>
+                    <td class="criteria">Priority Value</td>
+                    <td class="preemptive">Configurable</td>
+                    <td class="notes">Can be preemptive or non-preemptive</td>
+                </tr>
+                <tr>
+                    <td>Round Robin</td>
+                    <td class="type">Preemptive</td>
+                    <td class="criteria">Time Quantum</td>
+                    <td class="preemptive">Yes</td>
+                    <td class="notes">Fair scheduling with time slices</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="back-button" onclick="window.location.href='output.html'">Back to Simulation</button>
+    <script src="gantt.js"></script>
+</body>
+</html> 
