@@ -10,6 +10,7 @@ This project is a **CPU Scheduling Simulator** built using **HTML, CSS, and Java
   - Shortest Job First (SJF)
   - Priority Scheduling
   - Round Robin (User can set time quantum)
+  - Shortest Remaining Time First (SRTF)
 - **Dynamic Gantt Chart Visualization**
 - **Animated Ready Queue Updates**
 - **Pause and Resume Simulation**
